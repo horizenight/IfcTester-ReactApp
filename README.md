@@ -1,3 +1,6 @@
+# IfcTester React App 
+
+A simple implementation of rendering of the `idsMetadata` using React.js
 
 ## Prerequisites
 Before running this project, ensure that you have the following software installed on your machine:
@@ -38,4 +41,4 @@ To install the IfcTester ReactApp, follow these steps:
     This command starts the development server for the IfcTester React App.
 
 
-### Deployed on `Vercel.com`
+### Deployed on [https://ifc-tester-react-app.vercel.app/](https://ifc-tester-react-app.vercel.app/)
