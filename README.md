@@ -17,13 +17,13 @@ To install the IfcTester ReactApp, follow these steps:
 1. **Clone the repository:**
 
     ```bash
-    git clone project.git
+    git clone https://github.com/horizenight/IfcTester-ReactApp.git
     ```
 
 2. **Navigate to the project directory:**
 
     ```bash
-    cd project
+    cd IfcTester-ReactApp
     ```
 
 3. **Install dependencies:**
