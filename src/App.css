@@ -162,6 +162,8 @@ ids-spec {
     display: block;
     padding-left: 30px;
     overflow: hidden;
+    border:1px solid grey;
+    margin:5px;
 }
 ids-spec h2 a, .spec h2 a {
     display: none;
