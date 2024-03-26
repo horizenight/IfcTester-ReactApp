@@ -3,7 +3,158 @@ import "./App.css";
 import Spec from "./components/Spec";
 
 
-
+const mockApiResponse = {
+  "data": {
+    "idsData": {
+      "title": "buildingSMART Sample IDS",
+      "identifier": "5a3991d8-83f0-4cb5-adc8-f2c03b95eba8",
+      "copyright": "buildingSMART",
+      "version": "1.0.0",
+      "description": "These are example specifications for those learning how to use IDS",
+      "author": "foo@bar.com",
+      "date": "2022-01-01",
+      "purpose": "Contractual requirements",
+      "milestone": null,
+      "specifications": [
+        {
+          "identifier": "e910bd5e-57d4-41c1-a41b-a6449aa717bb",
+          "name": "Project naming",
+          "description": "Projects shall be named correctly for the purposes of identification, project archival, and model federation.",
+          "instructions": "Each discipline is responsible for naming their own project.",
+          "ifcVersion": [
+            "IFC4"
+          ],
+          "necessity": "optional",
+          "applicability": {
+            "entity": {
+              "8f51dafc-0824-404c-acdc-e138b65928bd": {
+                "filterType": "applicability",
+                "identifier": "8f51dafc-0824-404c-acdc-e138b65928bd",
+                "necessity": "required",
+                "name": [
+                  "IFCPROJECT"
+                ],
+                "matchTypeName": "simpleValue",
+                "predefinedType": [],
+                "matchTypePredefinedType": "simpleValue",
+                "instructions": null,
+                "facetType": "entity",
+                "status": null,
+                "failedEntities": [],
+                "failedReasons": []
+              }
+            },
+            "partOf": {},
+            "classification": {},
+            "attribute": {},
+            "property": {},
+            "material": {}
+          },
+          "applicableEntities": [],
+          "failedEntities": [],
+          "requirements": {
+            "entity": {},
+            "partOf": {},
+            "classification": {},
+            "attribute": {
+              "fdaea732-2373-4519-bfe6-c6555d30ca4d": {
+                "filterType": "requirements",
+                "identifier": "fdaea732-2373-4519-bfe6-c6555d30ca4d",
+                "necessity": "required",
+                "name": [
+                  "Name"
+                ],
+                "matchTypeName": "simpleValue",
+                "value": [
+                  "TEST"
+                ],
+                "matchTypeValue": "simpleValue",
+                "instructions": "The project manager shall confirm the short project code with the client based on their real estate portfolio naming scheme.",
+                "facetType": "attribute",
+                "status": null,
+                "failedEntities": [],
+                "failedReasons": []
+              }
+            },
+            "property": {},
+            "material": {}
+          },
+          "status": null
+        },
+        {
+          "identifier": "8d9696ab-e5f6-4653-9c03-5edcfd6cb654",
+          "name": "Fire rating",
+          "description": "All objects must have a fire rating for building compliance checks and to know the protection strategies needed for any penetrations.",
+          "instructions": "The architect is responsible for including this data.",
+          "ifcVersion": [
+            "IFC4"
+          ],
+          "necessity": "optional",
+          "applicability": {
+            "entity": {
+              "b5fe3b1c-40d0-44db-a86e-4530ddf4f70c": {
+                "filterType": "applicability",
+                "identifier": "b5fe3b1c-40d0-44db-a86e-4530ddf4f70c",
+                "necessity": "required",
+                "name": [
+                  "IFCWALLTYPE"
+                ],
+                "matchTypeName": "simpleValue",
+                "predefinedType": [],
+                "matchTypePredefinedType": "simpleValue",
+                "instructions": null,
+                "facetType": "entity",
+                "status": null,
+                "failedEntities": [],
+                "failedReasons": []
+              }
+            },
+            "partOf": {},
+            "classification": {},
+            "attribute": {},
+            "property": {},
+            "material": {}
+          },
+          "applicableEntities": [],
+          "failedEntities": [],
+          "requirements": {
+            "entity": {},
+            "partOf": {},
+            "classification": {},
+            "attribute": {},
+            "property": {
+              "5ea95a3f-c61f-4313-9390-fa8430c0ba75": {
+                "filterType": "requirements",
+                "identifier": "5ea95a3f-c61f-4313-9390-fa8430c0ba75",
+                "necessity": "required",
+                "psetName": [
+                  "Pset_WallCommon"
+                ],
+                "matchTypePsetName": "simpleValue",
+                "name": [
+                  "FireRating"
+                ],
+                "matchTypeName": "simpleValue",
+                "value": [
+                  "(-|[0-9]{2,3})\\/(-|[0-9]{2,3})\\/(-|[0-9]{2,3})"
+                ],
+                "matchTypeValue": "regex",
+                "dataType": "IfcLabel",
+                "instructions": "Fire rating is specified using the Fire Resistance Level as defined in the Australian National Construction Code (NCC) 2019. Valid examples include -/-/-, -/120/120, and 60/60/60",
+                "facetType": "property",
+                "status": null,
+                "failedEntities": [],
+                "failedReasons": []
+              }
+            },
+            "material": {}
+          },
+          "status": null
+        }
+      ]
+    }
+  }
+}
 
 const customSpecsExample= [
   {
@@ -81,11 +232,12 @@ const customSpecsExample= [
 ]
 
 
+
+
 const App = () => {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (event) => {
-    console.log(event.target);
     setFile(event.target.files[0]);
   };
 
@@ -104,16 +256,20 @@ const App = () => {
         method: "POST",
         body: formData,
       });
-
+    
       if (!response.ok) {
         throw new Error("Failed to upload file");
       }
-
+      
       const responseData = await response.json();
+  
       setIdsMetadata(responseData.data.idsData);
       setSpecsList(responseData.data.idsData.specifications);
     } catch (error) {
-      console.error("Error uploading file:", error);
+      const responseData = mockApiResponse;
+      setIdsMetadata(responseData.data.idsData);
+      setSpecsList(responseData.data.idsData.specifications);
+      console.log("Error uploading file: backend api not working using mockApi");
     }
   };
 
