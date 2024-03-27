@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.10.3/brython.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/brython@3.10.3/brython_stdlib.js"></script>
+  </head>
+  <body onload="brython()">
+    <script type="text/python">
+# demo idsMetadata to be used 
+idsData = {
+  "title": "buildingSMART Sample IDS",
+  "identifier": "23b0270b-49a0-4a74-8be0-08902457c25c",
+  "copyright": "buildingSMART",
+  "version": "1.0.0",
+  "description": "These are example specifications for those learning how to use IDS",
+  "author": "foo@bar.com",
+  "date": "2022-01-01",
+  "purpose": "Contractual requirements",
+  "milestone": None,
+  "specifications": {}
+}
+
+from browser import document
+
+# Access the HTML elements
+title_element = document["title"]
+author_element = document["author"]
+version_element = document["version"]
+date_element = document["date"]
+milestone_element = document["milestone"]
+description_element = document["description"]
+purpose_element = document["purpose"]
+copyright_element = document["copyright"]
+
+# Update the content of the elements
+title_element.text = idsData["title"]
+author_element.text = idsData["author"]
+version_element.text = idsData["version"]
+date_element.text = idsData["date"]
+milestone_element.text = str(idsData["milestone"])
+description_element.text = idsData["description"]
+purpose_element.text = idsData["purpose"]
+copyright_element.text = idsData["copyright"]
+    </script>
+    
+    <ids-info>
+        <h1>
+          <ids-info-element contenteditable="true" id="title"></ids-info-element>
+        </h1>
+        <p>
+          <i data-feather="mail"></i>
+          <ids-info-element contenteditable="true" id="author"></ids-info-element>
+          <i data-feather="tag"></i>
+          <ids-info-element contenteditable="true" id="version"></ids-info-element>
+          <i data-feather="calendar"></i>
+          <ids-info-element contenteditable="true" id="date"></ids-info-element>
+          <i data-feather="crosshair"></i>
+          <ids-info-element contenteditable="true" id="milestone"></ids-info-element>
+        </p>
+        <p>
+          <ids-info-element contenteditable="true" id="description"></ids-info-element>
+        </p>
+        <p>
+          <ids-info-element contenteditable="true" id="purpose"></ids-info-element>
+        </p>
+        <p>
+          &copy;{" "}
+          <ids-info-element contenteditable="true" id="copyright"></ids-info-element>
+        </p>
+      </ids-info>
+
+ 
+  </body>
+</html>
